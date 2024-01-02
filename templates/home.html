@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Home</title>
+  </head>
+  <body class="flex flex-col justify-center content-center mt-[200px]">
+    <h1 class="flex justify-center text-2xl mb-4">
+      Καλωσήρθες<span class="ml-2 font-medium">{{username}}</span>
+    </h1>
+    <!-- Δημιουργία μενού με 3 κουμπιά -->
+    <div class="flex justify-center">
+      <div
+        class="flex justify-center space-x-8 bg-zinc-100 p-10 rounded-md items-center"
+      >
+        <a
+          href="/"
+          class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+          >Αρχική</a
+        >
+        <a
+          href="/products"
+          class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+          >Λίστα προϊόντων</a
+        >
+        <a
+          href="/logout"
+          class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+          >Αποσύνδεση</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

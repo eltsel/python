@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Edit Product</title>
+  </head>
+  <body class="flex justify-center flex-col">
+    <div
+      class="flex justify-center space-x-8 bg-zinc-100 w-auto p-10 rounded-md items-center h-[100px]"
+    >
+      <a
+        href="/"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Αρχική</a
+      >
+      <a
+        href="/products"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Λίστα προϊόντων</a
+      >
+      <a
+        href="/logout"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Αποσύνδεση</a
+      >
+    </div>
+    <!-- Φόρμα με τα απαραίτητα πεδία των στοιχείων των προϊόντων -->
+    <div class="flex w-full justify-center">
+      <form
+        id="productForm"
+        class="flex flex-col bg-zinc-100 mt-12 p-10 rounded-md w-96"
+      >
+        <label for="externalId">External ID:</label>
+        <input
+          type="text"
+          id="externalId"
+          name="externalId"
+          class="h-8 rounded-md mt-2 pl-2"
+        /><br />
+
+        <label for="code">Code:</label>
+        <input
+          type="text"
+          id="code"
+          name="code"
+          class="h-8 rounded-md mt-2 pl-2"
+        /><br />
+
+        <label for="description">Description:</label>
+        <textarea
+          type="text"
+          id="description"
+          name="description"
+          class="rounded-md mt-2 pl-2"
+        ></textarea
+        ><br />
+
+        <label for="barcode">Barcode:</label>
+        <input
+          type="text"
+          id="barcode"
+          name="barcode"
+          class="h-8 rounded-md mt-2 pl-2"
+        /><br />
+
+        <label for="retailPrice">Retail Price:</label>
+        <input
+          type="number"
+          step="any"
+          id="retailPrice"
+          name="retailPrice"
+          class="h-8 rounded-md mt-2 pl-2"
+        /><br />
+
+        <label for="wholesalePrice">Wholesale Price:</label>
+        <input
+          type="number"
+          step="any"
+          id="wholesalePrice"
+          name="wholesalePrice"
+          class="h-8 rounded-md mt-2 pl-2"
+        /><br />
+
+        <label for="discount">Discount:</label>
+        <input
+          type="number"
+          step="any"
+          id="discount"
+          name="discount"
+          class="h-8 rounded-md mt-2 pl-2"
+        /><br />
+
+        <button
+        type="button"
+          onclick='Swal.fire("Το προϊόν ενημερώθηκε"," ", "success");'
+          class="flex justify-center mt-6 bg-purple-900 text-white p-2 rounded-md"
+        >
+          Ενημέρωση Προϊόντος
+        </button>
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+      // μετατροπή τα δεδομέμνα του προδ σε μορφή json 
+      var product = JSON.parse('{{prod|tojson}}');
+      // Ορίζουμε τις τιμές των inputs
+      document.getElementById("externalId").value = product.externalId;
+      document.getElementById("code").value = product.code;
+      document.getElementById("description").value = product.description;
+      document.getElementById("barcode").value = product.barcode;
+      document.getElementById("retailPrice").value = product.retailPrice;
+      document.getElementById("wholesalePrice").value = product.wholesalePrice;
+      document.getElementById("discount").value = product.discount;
+
+    </script>
+  </body>
+</html>

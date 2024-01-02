@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Datatable</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+  </head>
+  <body class="flex flex-col content-center">
+    <!-- Menu -->
+    <div
+      class="flex justify-center space-x-8 bg-zinc-100 w-auto p-10 rounded-md items-center h-[100px] mb-4"
+    >
+      <a
+        href="/"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Αρχική</a
+      >
+      <a
+        href="/products"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Λίστα προϊόντων</a
+      >
+      <a
+        href="/logout"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Αποσύνδεση</a
+      >
+    </div>
+    <!-- Πίνακας προϊόντων -->
+    <table id="myTable" class="display">
+      <thead>
+        <tr>
+          <th>externalId</th>
+          <th>code</th>
+          <th>description</th>
+          <th>barcode</th>
+          <th>retailPrice</th>
+          <th>wholesalePrice</th>
+          <th>discount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="flex justify-center">
+      <a
+      href="/newProduct"
+      class="mt-6 bg-purple-900 text-white w-48 p-4 rounded-md flex justify-center"
+      >Προσθήκη προϊόντος</a
+    >
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+      function deleteRow(element) {
+        var row = $(element).closest("tr");
+        var table = $("#myTable").DataTable();
+        table.row(row).remove().draw();
+      }
+
+      $(document).ready(function () {
+        // Αρχικοποίηση του datatable
+        var table = $("#myTable").DataTable({
+          data: JSON.parse('{{products|tojson}}'),
+          columns: [
+            { data: "externalId" },
+            { data: "code" },
+            { data: "description" },
+            { data: "barcode" },
+            { data: "retailPrice" },
+            { data: "wholesalePrice" },
+            { data: "discount" },
+            {
+              data: null,
+              render: function (data, type, row) {
+                return `<a href='/editProduct/${row.externalId}' class='bg-orange-300 text-white p-2 rounded-md inline-block'><span class='material-symbols-outlined'>edit</span></a><button class='bg-red-400 text-white p-2 ml-2 rounded-md inline-block'><span class='material-symbols-outlined' onclick="deleteRow(this)">delete</span></button>`;
+              },
+            },
+          ],
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Product Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body class="flex flex-col justify-center">
+    <!-- Menu -->
+    <div
+      class="flex justify-center space-x-8 bg-zinc-100 w-auto p-10 rounded-md items-center h-[100px] mb-4"
+    >
+      <a
+        href="/"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Αρχική</a
+      >
+      <a
+        href="/products"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Λίστα προϊόντων</a
+      >
+      <a
+        href="/logout"
+        class="bg-purple-900 text-white rounded-md p-4 font-medium w-[200px] justify-center flex"
+        >Αποσύνδεση</a
+      >
+    </div>
+    <div class="flex justify-center">
+      <!-- Φόρμα για την εισαγωγή νέου προϊόντος -->
+      <form
+        id="productForm"
+        class="flex flex-col bg-zinc-100 mt-12 p-10 rounded-md w-96"
+      >
+        <label for="externalId">External ID:</label>
+        <input
+          type="number"
+          id="externalId"
+          name="externalId"
+          class="h-8 rounded-md mt-2"
+        />
+        <div id="externalIdError" class="text-red-600 mt-1"></div>
+        <br />
+
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code" class="h-8 rounded-md mt-2" />
+        <div id="codeError" class="text-red-600 mt-1"></div>
+        <br />
+
+        <label for="description">Description:</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          class="h-8 rounded-md mt-2"
+        />
+        <div id="descriptionError" class="text-red-600 mt-1"></div>
+        <br />
+
+        <label for="barcode">Barcode:</label>
+        <input
+          type="text"
+          id="barcode"
+          name="barcode"
+          class="h-8 rounded-md mt-2"
+        />
+        <div id="barcodeError" class="text-red-600 mt-1"></div>
+        <br />
+
+        <label for="retailPrice">Retail Price:</label>
+        <input
+          type="number"
+          id="retailPrice"
+          name="retailPrice"
+          class="h-8 rounded-md mt-2"
+        />
+        <div id="retailPriceError" class="text-red-600 mt-1"></div>
+        <br />
+
+        <label for="wholesalePrice">Wholesale Price:</label>
+        <input
+          type="number"
+          id="wholesalePrice"
+          name="wholesalePrice"
+          class="h-8 rounded-md mt-2"
+        />
+        <div id="wholesalePriceError" class="text-red-600 mt-1"></div>
+        <br />
+
+        <label for="discount">Discount:</label>
+        <input
+          type="number"
+          id="discount"
+          name="discount"
+          class="h-8 rounded-md mt-2"
+        />
+        <div id="discountError" class="text-red-600 mt-1"></div>
+        <br />
+
+        <button
+          type="button"
+          onclick="valid()"
+          class="flex justify-center mt-6 bg-purple-900 text-white p-2 rounded-md"
+        >
+          Προσθήκη Προϊόντος
+        </button>
+      </form>
+    </div>
+
+    <script>
+      // συνάρτηση που ελέγχει τις τιμές των πεδίων
+      function valid() {
+        var hasErrors = false;
+
+        var externalId = document.getElementById("externalId").value;
+        var code = document.getElementById("code").value;
+        var description = document.getElementById("description").value;
+        var barcode = document.getElementById("barcode").value;
+        var retailPrice = document.getElementById("retailPrice").value;
+        var wholesalePrice = document.getElementById("wholesalePrice").value;
+        var discount = document.getElementById("discount").value;
+
+        if (externalId === "" || isNaN(externalId)) {
+          document.getElementById("externalId").classList.add("border-red-600");
+          document.getElementById("externalIdError").textContent = "Λάθος τιμή";
+          hasErrors = true;
+        } else {
+          document
+            .getElementById("externalId")
+            .classList.remove("border-red-600");
+        }
+        if (code === "" || isNaN(code)) {
+          document.getElementById("code").classList.add("border-red-600");
+          document.getElementById("codeError").textContent = "Λάθος τιμή";
+          hasErrors = true;
+        } else {
+          document.getElementById("code").classList.remove("border-red-600");
+        }
+        if (description === "") {
+          document
+            .getElementById("description")
+            .classList.add("border-red-600");
+
+          document.getElementById("descriptionError").textContent =
+            "Λάθος τιμή";
+          hasErrors = true;
+        } else {
+          document
+            .getElementById("description")
+            .classList.remove("border-red-600");
+        }
+        if (barcode === "" || isNaN(barcode)) {
+          document.getElementById("barcode").classList.add("border-red-600");
+          document.getElementById("barcodeError").textContent = "Λάθος τιμή";
+          hasErrors = true;
+        } else {
+          document.getElementById("barcode").classList.remove("border-red-600");
+        }
+        if (retailPrice === "" || isNaN(retailPrice)) {
+          document
+            .getElementById("retailPrice")
+            .classList.add("border-red-600");
+          document.getElementById("retailPriceError").textContent =
+            "Λάθος τιμή";
+          hasErrors = true;
+        } else {
+          document
+            .getElementById("retailPrice")
+            .classList.remove("border-red-600");
+        }
+        if (wholesalePrice === "" || isNaN(wholesalePrice)) {
+          document
+            .getElementById("wholesalePrice")
+            .classList.add("border-red-600");
+          document.getElementById("wholesalePriceError").textContent =
+            "Λάθος τιμή";
+          hasErrors = true;
+        } else {
+          document
+            .getElementById("wholesalePrice")
+            .classList.remove("border-red-600");
+        }
+        if (discount === "" || isNaN(discount)) {
+          document.getElementById("discount").classList.add("border-red-600");
+          document.getElementById("discountError").textContent = "Λάθος τιμή";
+          hasErrors = true;
+        }
+          if (hasErrors) {
+            return false;
+          } else {
+            Swal.fire("Το προϊόν προστέθηκε", " ", "success");
+          }
+      }
+    </script>
+  </body>
+</html>
